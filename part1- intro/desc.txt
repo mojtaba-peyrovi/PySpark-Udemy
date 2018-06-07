@@ -1,0 +1,14 @@
+we use big data techniques when the data is huge so that we have to use distributed system with many different nodes as data sources and one main machine.
+the other machines other than the main one are sometimes called "Slave Machines"
+Fault Tolerance: when one of the machines or nodes stops working, the whole system keeps working.
+the main computer tracks Jobs and allocates them to the Slaves (128 MB data for each) and they do task tracking.
+HDFD distributes the data file to the nodes or slaves, MapReduce distribute the computational tasks to the nodes.
+Spark is the rival to MapReduce not Hadoop.  
+Spark can use data from HDFS, AWS S3, Cassandra, more,
+Spark can do calculations 100x times faster than Hadoop-MapReduce
+RDD: Resiliant Distributed Datasets. 
+RDDs are immutable, lazy and cacheable.
+2 types of RDD actions:    
+==== Transformations : a recipe to follow
+==== Actions: the action and response to the recipe
+we have 2 types of API. first RDD based API or Syntax and DataFrame API. DataFrame API makes more sense and we will use this syntax.
