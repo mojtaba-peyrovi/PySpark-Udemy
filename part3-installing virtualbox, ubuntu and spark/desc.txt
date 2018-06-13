@@ -1,0 +1,9 @@
+part3: 
+installed virtualbox on windows for ubuntu 16
+since pyspark is still unavailable for python 3.6 and the latest ubuntu (18) comes with python 3.6, I installed ubuntu 16 that has built-in python 3.5
+also installed jupyter notebook. 
+with this ==> pip3 install findspark  ==> we will have our spark global.
+we have to import findspark 
+then we say: findspark.init('<working_path'>)
+after this we can simply call spark from any folder.
+linux : pwd: ==>print working directory.
