@@ -1,0 +1,21 @@
+basics with Jose part 1
+df.columns --> is an atteibute and shows the name of the columns. 
+df.printSchema() ==> shows the tree shaped schema with datatypes for each column.
+---
+from pyspark.sql.types import StructField, StructType, IntegerType, StringType
+then we can make schema like this:  data_schema = [StructField('age',integerType(),True),                     ======> that True says it is nullable.
+                                                                           StructField('name',StringType(), True)] 
+then we can say:   final_struct = StructType(fields=data_schema)
+
+now we can read the json file again :  df = spark.read.json('people.json',schema='final_struct')
+this way we can change the data types/
+
+------------------
+basics with Jose part 2
+to see a column:  df.select('age').show()    ==> select returns a dataframe with age column in it.
+df.head(2) shows the 2 top rows as arrays. in order to see the first one ==>? df.head()[0]
+we can also see more than a column. in this case like pandas we will pass a list of columns.
+- in order to make a column we use df.withcolum()
+- to rename the column name we say: df.withColumnRenamed(<oldname>m<newname>)
+- we can directly run sql in spak.   df.createOrReplaceTempView('people')
+results = spark.sql("SELECT * from people")
