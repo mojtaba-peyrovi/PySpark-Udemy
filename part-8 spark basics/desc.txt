@@ -1,0 +1,52 @@
+
+basics with Jose part 1
+df.columns --> is an atteibute and shows the name of the columns. 
+df.printSchema() ==> shows the tree shaped schema with datatypes for each column.
+---
+from pyspark.sql.types import StructField, StructType, IntegerType, StringType
+then we can make schema like this:  data_schema = [StructField('age',integerType(),True),                     ======> that True says it is nullable.
+                                                                           StructField('name',StringType(), True)] 
+then we can say:   final_struct = StructType(fields=data_schema)
+
+now we can read the json file again :  df = spark.read.json('people.json',schema='final_struct')
+this way we can change the data types/
+
+------------------
+basics with Jose part 2
+to see a column:  df.select('age').show()    ==> select returns a dataframe with age column in it.
+df.head(2) shows the 2 top rows as arrays. in order to see the first one ==>? df.head()[0]
+we can also see more than a column. in this case like pandas we will pass a list of columns.
+- in order to make a column we use df.withcolum()
+- to rename the column name we say: df.withColumnRenamed(<oldname>m<newname>)
+- we can directly run sql in spak.   df.createOrReplaceTempView('people')
+results = spark.sql("SELECT * from people")
+-------------------
+part3: 
+Spark basic Operations:
+another way of doing sql:
+df.filter("sql_query").show()
+if we want only few columns where the condition is true:   df.filter("condition").select([list of columns we need"]).show()
+in order to do multiple conditions we need to use & for and, | for or and ~ for not. also each condition has to be 
+in a dedicated parenthesis.
+Collect() rather than Show()  ==> collect will save the results in a list and we can use them later as a variable. 
+in normal life people use Collect() more than show().
+--------------------
+part4:
+df.groupby("column_name") groupby based on a column.
+we can then use different aggregate functions such as df.groupby("Company").mean()
+df.agg() -===> we can pass a dictionary of different options like:  df.agg({'Sales':'sum'})
+we can also do it this way:  df.groupby("Company").agg({'Sales':'max'}).show()
+we can also import more functions from pyspark.sql.functions    such as :
+  -- df.select(countDistindct('Sales')).show() ==> it shows the distinct sales count.
+ --- df.select(avg('Sales')).show()  ==> shows the averge of sales
+-- if we want to change the column name for the result we can say: df.select(avg('Sales').alias('New_name')).show()
+also we can round numbers by saying: form pyspark.sql.functions import format.number
+then with .select(format_number('column_name', decimal_numbers)).show() we can round to decimal numbers we want for example: .select(format_number('Standard Deviation",2)).show() ==> 250.09
+-- orderBy;  ascending:   df.orderBy('Sales').show()
+                    descending:   df.orderBy(df['Sales'].desc()).show()
+---------------
+part5: missing data
+if we want to drop them:   df.na.drop()    if we want to have a treshhold we say df.na.drop(thresh=2) it means drop 
+the row if it has more than 2 missing values
+also:  df.na.drop(how='all') ==> it will drop the rows where all values are missing  (default is any)
+= > we can pass a subset of the dataframe for example;  df.na.drop(subset=['Sales'])
