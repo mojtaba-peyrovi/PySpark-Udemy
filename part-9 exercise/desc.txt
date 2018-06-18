@@ -1,0 +1,11 @@
+part 9: Exerciase
+-in order to format numbers we can use pyspark.sql.functions  -> format_numbers() method
+from pyspark.sql.functions import ofrmat_numbers
+then: for each column we can say:  format_nmubers(df['column_name'].cast('data_type'),2).alias('new column_name')
+in spark df['column_name'] doesnt return the column. we need to say: df.select('coumn_name').show()
+-pyspark.sql.functions has aggregate functions like avg, sum, count, etc. we can easily user them like: 
+   f.select(aggregate_function('column_name')).show()
+-from pyspark.sql.functions import corr  ==> .it calculates correlation of 2 columns.
+- in order to find the max of a specific column based on a categorical data:
+  we just need to groupby the categorical data and .max() of it will bring the max of each group. 
+e.g. max_df = df.groupBy('Year').max()  --> this will groupby year and shows max of each group./ 
