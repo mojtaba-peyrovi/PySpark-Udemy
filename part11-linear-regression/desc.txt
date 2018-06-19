@@ -1,0 +1,18 @@
+part11:
+for using ml linear regression library of spark we need to say:
+from pyspark.ml.regression import LinearRegression
+format() method is the general form of data format we should use after spark.read as an object of it and pass the datatype we want.
+IMPORTANT: libsvm is a datatype thats being used for machine learning purposes.
+we import data and then we start as usual instantiating the linearregression object:
+lr = LinearRegression( featuresCol=<feauter_column_name>, labelCol=<labels_column_name>, predictionCol=<prediction_column_we_like_to_name>)
+then we need to fit the training data into the lr and we can call it lrModel = lr.fit(traning)
+now we can get coefficients ==> lrModel.coefficients     and also intercept:   lrModl.intercept
+- in order to split test and train data we need to run randomSplit off of all data. 
+we can have a tuple unpacking and say:     train,test =df.randomSplit([.7,0.3])     this means 70% of data will be used as train and 30% for test.
+REVIEW: the difference between the actual y and the predicted y is called residual
+when we want to use the linear regression model when we wanted to use it we need can remove the features from test data,
+then we can use transform() method. like this:   predictions = df.transform(<unlabeled_data>) and it will show the predicted labels.
+- in order to convert any data like csv to the format understandable for pyspark and MLlib we need to import:
+ - from pyspark.ml.linalg import Vectors
+ - from pyspark.ml.feature import VectorAssembler
+then we need to use VectorAssembler() and pass the list of all features we want as inputCol and the ourputCol which is going to be a single vector including all features for each row.
