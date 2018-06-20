@@ -16,3 +16,11 @@ then we can use transform() method. like this:   predictions = df.transform(<unl
  - from pyspark.ml.linalg import Vectors
  - from pyspark.ml.feature import VectorAssembler
 then we need to use VectorAssembler() and pass the list of all features we want as inputCol and the ourputCol which is going to be a single vector including all features for each row.
+
+--------------
+linear regression consulting project:
+when we want to convert string to number we can use a function called StringIndexer() 
+we use it this way: 
+from pyspark.ml.feature import StringIndexer
+indexer = StringIndexer(inpoutCol='<the_original__column_name>', outputCol='<the_converted_column_name>').fit(df)
+new_df = indexer.transform(df)
