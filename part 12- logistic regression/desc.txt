@@ -1,0 +1,3 @@
+logistic regression:
+everything is as usual. 
+we can use BinaryClassificationEvaluator, or MulticlassClassificationEvaluator form pyspark.ml.evaluation to evaluate the prediction as we can see in my notebook code along file.
